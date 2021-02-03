@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      GitBook 配置 &middot; Joy iOS
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/lanyon.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-precomposed.png">
+  <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-0b">
+
+    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+     styles, `#sidebar-checkbox` for behavior. -->
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-item">
+    <p>乐人之乐，人亦乐其乐</p>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="/">首页</a>
+
+    
+
+    
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          <a class="sidebar-nav-item" href="/about/">About Me</a>
+        
+      
+    
+      
+    
+
+    <a class="sidebar-nav-item" href="http://github.com/liufan321">GitHub project</a>
+  </nav>
+
+  <div class="sidebar-item">
+    <p>
+      &copy; 2015. All rights reserved.
+    </p>
+  </div>
+</div>
+
+
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+         content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="/" title="Home">Joy iOS</a>
+            <small>享受编程之美，尽享开发乐趣……</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">GitBook 配置</h1>
+  <span class="post-date">26 Feb 2015</span>
+  <p>1&gt; 下载并安装 npm</p>
+
+<p>node-v0.12.0.pkg <a href="http://nodejs.org/download/">http://nodejs.org/download/</a></p>
+
+<p>2&gt; 安装 gitbook</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>sudo npm install gitbook-cli -g
+</code></pre></div>
+<p>3&gt; 进入终端 cd 到新建的电子书目录</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>touch SUMMARY.md
+<span class="c"># 第一次运行需要 sudo</span>
+<span class="nv">$ </span>gitbook init
+</code></pre></div>
+<p>4&gt; 下载并安装 gitbookEditor，gitbook 本地编辑器 <a href="https://github.com/GitbookIO/editor/releases">https://github.com/GitbookIO/editor/releases</a></p>
+
+<ul>
+<li>打开并选择刚刚 init 的目录即可编辑</li>
+</ul>
+
+<p>5&gt; 本地预览</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># 第一次运行需要 sudo</span>
+<span class="nv">$ </span>gitbook serve
+</code></pre></div>
+<p>6&gt; 生成 html 电子书</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># 第一次运行需要 sudo</span>
+<span class="nv">$ </span>gitbook build
+</code></pre></div>
+<p>7&gt; 下载并安装 calibre，生成电子书使用</p>
+
+<p>calibre-2.20.0 <a href="http://calibre-ebook.com/download_osx">http://calibre-ebook.com/download_osx</a></p>
+
+<ul>
+<li>在终端输入</li>
+</ul>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>ln -s /Applications/calibre.app/Contents/MacOS/ebook-convert /usr/local/bin
+</code></pre></div>
+<p>8&gt; 生成电子书</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>gitbook epub
+
+或者
+
+<span class="nv">$ </span>gitbook pdf
+</code></pre></div>
+<p>8&gt; .gitignore <a href="https://github.com/github/gitignore.git">https://github.com/github/gitignore.git</a>        </p>
+
+</div>
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="//2015/10/05/customize_nslog/">
+            自定义 NSLog
+            <small>05 Oct 2015</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="//2015/06/24/objc_block_recursion/">
+            BLOCK写递归
+            <small>24 Jun 2015</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="//2015/01/12/ns_enum_vs_ns_options/">
+            NS_ENUM & NS_OPTIONS
+            <small>12 Jan 2015</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+      </div>
+    </div>
+
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+    <script>
+      (function(document) {
+        var toggle = document.querySelector('.sidebar-toggle');
+        var sidebar = document.querySelector('#sidebar');
+        var checkbox = document.querySelector('#sidebar-checkbox');
+
+        document.addEventListener('click', function(e) {
+          var target = e.target;
+
+          if(!checkbox.checked ||
+             sidebar.contains(target) ||
+             (target === checkbox || target === toggle)) return;
+
+          checkbox.checked = false;
+        }, false);
+      })(document);
+    </script>
+  </body>
+</html>

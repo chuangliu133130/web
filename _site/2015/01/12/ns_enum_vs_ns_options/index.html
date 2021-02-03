@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      NS_ENUM & NS_OPTIONS &middot; Joy iOS
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/lanyon.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-precomposed.png">
+  <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-0b">
+
+    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+     styles, `#sidebar-checkbox` for behavior. -->
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-item">
+    <p>乐人之乐，人亦乐其乐</p>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="/">首页</a>
+
+    
+
+    
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          <a class="sidebar-nav-item" href="/about/">About Me</a>
+        
+      
+    
+      
+    
+
+    <a class="sidebar-nav-item" href="http://github.com/liufan321">GitHub project</a>
+  </nav>
+
+  <div class="sidebar-item">
+    <p>
+      &copy; 2015. All rights reserved.
+    </p>
+  </div>
+</div>
+
+
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+         content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="/" title="Home">Joy iOS</a>
+            <small>享受编程之美，尽享开发乐趣……</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">NS_ENUM & NS_OPTIONS</h1>
+  <span class="post-date">12 Jan 2015</span>
+  <p><code>NS_ENUM</code> 和 <code>NS_OPTIONS</code> 是在 iOS 6 推出用于代替 enum 的更好的办法</p>
+
+<h2>enum</h2>
+
+<p>在以前，要定义枚举类型，都是使用 <code>enum</code> 来实现的，这是在 C 语言中预设定义常量的方法</p>
+
+<p>使用 <code>enum</code> 定义枚举可以有以下两种方式：</p>
+
+<h3>1. 定义枚举</h3>
+<div class="highlight"><pre><code class="language-text" data-lang="text">enum {
+    UITableViewCellStyleDefault,
+    UITableViewCellStyleValue1,
+    UITableViewCellStyleValue2,
+    UITableViewCellStyleSubtitle
+};
+</code></pre></div>
+<p>这种方法只定义枚举，但是不定义类型</p>
+
+<h3>2. 定义枚举 同时定义类型</h3>
+<div class="highlight"><pre><code class="language-text" data-lang="text">typedef enum {
+    UITableViewCellStyleDefault,
+    UITableViewCellStyleValue1,
+    UITableViewCellStyleValue2,
+    UITableViewCellStyleSubtitle
+} UITableViewCellStyle;
+</code></pre></div>
+<p>定义 <code>UITableViewCellStyle</code> 类型并且预设枚举类型</p>
+
+<p>大概在 iOS 5.0 时期，苹果公司采用以下方式定义枚举类型</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">typedef enum {
+    UITableViewCellStyleDefault,
+    UITableViewCellStyleValue1,
+    UITableViewCellStyleValue2,
+    UITableViewCellStyleSubtitle
+};
+
+typedef NSInteger UITableViewCellStyle;
+</code></pre></div>
+<p>这种方式指定了 <code>UITableViewCellStyle</code> 的数据类型，但并没有告诉编译器这个类型与之前的 <code>enum</code> 有什么关系</p>
+
+<p>再后来，苹果推出了 <code>NS_ENUM</code> &amp; <code>NS_OPTIONS</code> 两个宏来定义枚举类型</p>
+
+<h2>NS_ENUM</h2>
+
+<p>如果查看今天的 <code>UITableViewCell.h</code> 会发现，枚举类型的定义已经变为：</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">typedef NS_ENUM(NSInteger, UITableViewCellStyle) {
+    UITableViewCellStyleDefault,
+    UITableViewCellStyleValue1, 
+    UITableViewCellStyleValue2, 
+    UITableViewCellStyleSubtitle
+};
+</code></pre></div>
+<p>参数说明</p>
+
+<ul>
+<li>枚举的数据类型</li>
+<li>枚举类型的名称</li>
+</ul>
+
+<p>大括号里面和以前 <code>enum</code> 一样，是需要定义的预设值</p>
+
+<p>这种实现方法可以在 <code>switch</code> 语句中检查类型</p>
+
+<h2>NS_OPTIONS</h2>
+
+<p>在 C 语言开发时，也可以使用<strong>按位掩码（bitmask）</strong>来定义枚举类型</p>
+
+<p>例如：</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">typedef enum {
+    NSJSONReadingMutableContainers = (1UL &lt;&lt; 0),
+    NSJSONReadingMutableLeaves = (1UL &lt;&lt; 1),
+    NSJSONReadingAllowFragments = (1UL &lt;&lt; 2)
+} NSJSONReadingOptions;
+</code></pre></div>
+<p>使用<strong>按位掩码</strong>枚举的最大的好处在于：<strong>只使用一个参数便可以传递各种选项的组合</strong></p>
+
+<ul>
+<li>使用<strong>按位或(|)</strong>为枚举类型赋值</li>
+<li>使用<strong>按位与(&amp;)</strong>判断是否设置了某个选项</li>
+<li>传入<strong>0</strong>表示什么附加选线都没有</li>
+</ul>
+
+<p>在 OC 中，要定义按位掩码的枚举类型，可以使用 <code>NS_OPTIONS</code> 宏，示例如下：</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">typedef NS_OPTIONS(NSUInteger, NSJSONReadingOptions) {
+    NSJSONReadingMutableContainers = (1UL &lt;&lt; 0),
+    NSJSONReadingMutableLeaves = (1UL &lt;&lt; 1),
+    NSJSONReadingAllowFragments = (1UL &lt;&lt; 2)
+};
+</code></pre></div>
+<p>又如：</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">typedef NS_OPTIONS(NSUInteger, NSKeyValueObservingOptions) {
+    NSKeyValueObservingOptionNew = 0x01,
+    NSKeyValueObservingOptionOld = 0x02,
+    NSKeyValueObservingOptionInitial = 0x04,
+    NSKeyValueObservingOptionPrior = 0x08
+};
+</code></pre></div>
+<p>今后大家看到凡是用 <code>NS_OPTIONS</code> 定义的枚举，就可以：</p>
+
+<ul>
+<li>使用<strong>按位或(|)</strong>指定多个选项的组合</li>
+<li>如果不需要任何附加选项，直接传入 0，这样效率最高，:D</li>
+</ul>
+
+</div>
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="//2015/10/05/customize_nslog/">
+            自定义 NSLog
+            <small>05 Oct 2015</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="//2015/06/24/objc_block_recursion/">
+            BLOCK写递归
+            <small>24 Jun 2015</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="//2015/02/26/gitbook_config/">
+            GitBook 配置
+            <small>26 Feb 2015</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+      </div>
+    </div>
+
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+    <script>
+      (function(document) {
+        var toggle = document.querySelector('.sidebar-toggle');
+        var sidebar = document.querySelector('#sidebar');
+        var checkbox = document.querySelector('#sidebar-checkbox');
+
+        document.addEventListener('click', function(e) {
+          var target = e.target;
+
+          if(!checkbox.checked ||
+             sidebar.contains(target) ||
+             (target === checkbox || target === toggle)) return;
+
+          checkbox.checked = false;
+        }, false);
+      })(document);
+    </script>
+  </body>
+</html>
